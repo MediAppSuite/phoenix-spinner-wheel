@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import { Wheel } from "react-custom-roulette";
 import { WheelData } from "react-custom-roulette/dist/components/Wheel/types";
 
@@ -33,17 +34,17 @@ export default function SpinWheel() {
         data={rouletteData}
         textColors={["#ffffff"]}
         innerRadius={30}
-        outerBorderColor={"#ccc"}
-        outerBorderWidth={9}
+        outerBorderColor={"#DECC5B"}
+        outerBorderWidth={15}
         innerBorderColor={"#f2f2f2"}
         radiusLineColor={"tranparent"}
         radiusLineWidth={1}
         pointerProps={{
           src: "/images/pointer.png",
           style: {
-            transform: "translate(-20px, -5px)",
-            right: "initial",
-            top: "415px",
+            rotate: "230deg",
+            right: "15px",
+            top: "40px",
           },
         }}
         backgroundColors={[
@@ -62,10 +63,11 @@ export default function SpinWheel() {
         ]}
       />
       <button
-        className="button roulette-button"
+        className=" roulette-button"
         onClick={() => setMustSpin(!mustSpin)}
       >
-        Spin
+         Spin 
+        <span>Click here to spin</span>
       </button>
     </div>
   );

@@ -18,7 +18,6 @@
   outline: none;
   background: transparent;
   color: black;
-  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,6 +32,7 @@
   top: 50%;
   left: 50%;
   z-index: +9;
+  border: 5px #DECC5B solid;
   border-radius: 5rem;
   width: 8rem;
   height: 8rem;
@@ -41,6 +41,17 @@
   color: #000;
   font-size: 0.8rem;
   font-weight: bold;
+  color: #EC5C28;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 36px;
+}
+
+.roulette-button span {
+  display: block;
+  font-size: 10px;
+  color: #383838;
+  font-weight: 300;
 }
 
 .roulette-container {
@@ -66,4 +77,5 @@
 .spinner-parent > div {
   margin-left: auto;
   margin-right: auto;
+  rotate: 130deg;
 }
