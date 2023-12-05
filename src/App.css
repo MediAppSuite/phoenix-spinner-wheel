@@ -2,37 +2,68 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27%23EC5C28%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e") !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar-toggler, .navbar-toggler:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.button {
+  font-size: larger;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: black;
+  border: none;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: fit-content;
+  width: fit-content;
+  padding: 5px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.roulette-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: +9;
+  border-radius: 5rem;
+  width: 8rem;
+  height: 8rem;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.roulette-container {
+  position: relative;
+  width: 100%;
+  max-width: 550px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.roulette-container > div {
+  width: 100%;
+  height: 100%;
+  max-width: unset;
+  max-height: unset;
+}
+
+.main-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.spinner-parent > div {
+  margin-left: auto;
+  margin-right: auto;
 }
