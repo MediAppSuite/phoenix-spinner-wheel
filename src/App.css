@@ -79,3 +79,14 @@
   margin-right: auto;
   rotate: 130deg;
 }
+
+.winnersComponent {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  margin-top: 5%;
+}
+
+.recentWinnders,
+.toptWinnders {
+  width: 48%; /* Adjust as needed, leaving some space between the tables */
+}

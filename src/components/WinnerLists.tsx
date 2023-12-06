@@ -12,18 +12,12 @@ interface TwoTablesProps {
 
 const TwoTablesComponent: React.FC<TwoTablesProps> = ({ table1Data, table2Data }) => {
   return (
-    <div className='RecentwinnersTable'>
+    <div className='winnersComponent'>   
+      <div className='recentWinnders col-xs-12 col-sm-6' >
       <h2>Listed of Recently winners</h2>
       <Table striped bordered hover>
         {/* Render the headers */}
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gift</th>
-            <th>Received Date</th>
-          </tr>
-        </thead>
+        
         {/* Render the rows with data from table1Data */}
         <tbody>
           {table1Data.map((person, index) => (
@@ -36,18 +30,12 @@ const TwoTablesComponent: React.FC<TwoTablesProps> = ({ table1Data, table2Data }
           ))}
         </tbody>
       </Table>
-
+      </div>
+      <div className='toptWinnders col-xs-12 col-sm-6'>
       <h2>Listed of Top winners</h2>
       <Table striped bordered hover>
         {/* Render the headers for Table 2 */}
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gift</th>
-            <th>Received Date</th>
-          </tr>
-        </thead>
+        
         {/* Render the rows with data from table2Data */}
         <tbody>
           {table2Data.map((person, index) => (
@@ -60,6 +48,7 @@ const TwoTablesComponent: React.FC<TwoTablesProps> = ({ table1Data, table2Data }
           ))}
         </tbody>
       </Table>
+      </div>
     </div>
   );
 };
