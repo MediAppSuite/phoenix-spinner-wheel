@@ -1,12 +1,16 @@
 .App {
   text-align: center;
+  background-image: url("/public/images/bg.png");
+  height: 100%;
+  width: 100%;
 }
 
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 30 30%27%3e%3cpath stroke=%27%23EC5C28%27 stroke-linecap=%27round%27 stroke-miterlimit=%2710%27 stroke-width=%272%27 d=%27M4 7h22M4 15h22M4 23h22%27/%3e%3c/svg%3e") !important;
 }
 
-.navbar-toggler, .navbar-toggler:focus {
+.navbar-toggler,
+.navbar-toggler:focus {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -29,27 +33,27 @@
 
 .roulette-button {
   position: absolute;
-  top: 50%;
+  top: 25vh;
   left: 50%;
   z-index: +9;
-  border: 5px #DECC5B solid;
+  border: 5px #decc5b solid;
   border-radius: 5rem;
-  width: 8rem;
-  height: 8rem;
-  transform: translate(-50%, -50%);
+  width: 6rem;
+  height: 6rem;
+  transform: translate(-50%, 0%);
   background: white;
   color: #000;
   font-size: 0.8rem;
   font-weight: bold;
-  color: #EC5C28;
+  color: #ec5c28;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 36px;
+  font-size: 26px;
 }
 
 .roulette-button span {
   display: block;
-  font-size: 10px;
+  font-size: 8px;
   color: #383838;
   font-weight: 300;
 }
@@ -74,8 +78,63 @@
   margin: 0 auto;
 }
 
-.spinner-parent > div {
-  margin-left: auto;
-  margin-right: auto;
-  rotate: 130deg;
+.spinner-parent > .bhdLno {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 60px;
+}
+
+.banner {
+  width: 60vw;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%) !important;
+  top: 0 !important;
+  margin-left: initial !important;
+  margin-right: initial !important;
+  height: 100%;
+  background-image: linear-gradient(#e85321b9, #e8542199);
+  max-width: 350px;
+}
+
+.f-cl-orange {
+  color: #ec5c28 !important;
+}
+
+.f-cl-grey {
+  color: #595757 !important;
+}
+
+footer {
+  background-color: #e75a29;
+  color: #fff;
+}
+
+footer p {
+  font-size: 15px;
+}
+
+footer > .bi {
+  font-size: 25px;
+}
+
+footer > .bi-x-diamond-fill {
+  font-size: 8px !important;
+  font-weight: 100;
+}
+
+footer input,
+footer button {
+  background: #e75a29 !important;
+  color: #fff !important;
+  border: 1px solid #fff !important;
+}
+
+.img-spin {
+  position: absolute !important;
+  left: 0px;
+  top: 50%;
+  transform: translate(0px, -50%);
+  width: 50px;
 }
