@@ -4,19 +4,13 @@ import { WheelData } from "react-custom-roulette/dist/components/Wheel/types";
 
 export default function SpinWheel() {
   const data: WheelData[] = [
-    { option: "Rs. 10,000 Voucher", style: { fontSize: 15 } },
+    { option: "Try again", style: { fontSize: 15 } },
     {
-      option: "Rs. 80,000 Voucher",
-      style: { fontSize: 15, textColor: "#000" },
+      option: "10% off From the website",
+      style: { fontSize: 12, textColor: "#000" },
     },
-    { option: "5% Discount", style: { fontSize: 15 } },
-    { option: "Rs. 65,000 Voucher", style: { fontSize: 15, textColor: "#000" } },
-    { option: "70% Discount", style: { fontSize: 15 } },
-    { option: "Rs. 100,000 Voucher", style: { fontSize: 15, textColor: "#000" } },
-    { option: "Rs. 5,000 Voucher", style: { fontSize: 15 } },
-    { option: "40% Discount", style: { fontSize: 15, textColor: "#000" } },
-    { option: "Rs. 15,000 Voucher", style: { fontSize: 15 } },
-    { option: "10% Discount", style: { fontSize: 15, textColor: "#000" } },
+    { option: "20% off at Showrooms", style: { fontSize: 12 } },
+    { option: "Free Gift Pack", style: { fontSize: 15, textColor: "#000" } },
   ];
 
   const [mustSpin, setMustSpin] = useState(false); // eslint-disable-next-line
@@ -82,10 +76,9 @@ export default function SpinWheel() {
         data={rouletteData}
         textColors={["#ffffff"]}
         outerBorderColor={"#DECC5B"}
-        outerBorderWidth={15}
+        outerBorderWidth={10}
         innerBorderColor={"#f2f2f2"}
         radiusLineColor={"tranparent"}
-        radiusLineWidth={1}
         pointerProps={{
           src: "/images/pointer.png",
           style: {
