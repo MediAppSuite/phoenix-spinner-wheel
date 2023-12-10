@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
   return (
@@ -10,7 +11,7 @@ export default function NavBar() {
       }}
     >
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="/" style={{ width: "75%" }}>
           <img src="/images/logo.png" alt="" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -20,8 +21,12 @@ export default function NavBar() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
+            <Nav.Link>
+              <Link to={"/my-winnings"}>My Winnings</Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to={"/my-details"}>My Details</Link>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

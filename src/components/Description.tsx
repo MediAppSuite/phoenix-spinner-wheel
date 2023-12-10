@@ -2,7 +2,7 @@ import { Card } from "react-bootstrap";
 
 export default function Description() {
   return (
-    <div style={{ marginTop: "15vh" }} className="mb-4">
+    <div style={{ marginTop: "150px" }} className="mb-4">
       <Card style={{ borderRadius: "20px" }} className="p-4 mx-4">
         The Fortune Wheel is a captivating game of chance that combines luck and
         anticipation. Participants eagerly gather around the wheel, eyes fixed
