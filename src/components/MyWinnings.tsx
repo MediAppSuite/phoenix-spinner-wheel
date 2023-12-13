@@ -1,6 +1,4 @@
 import { Button, Card } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-
 export default function MyWinnings() {
   return (
     <div className="m-4">
@@ -14,7 +12,7 @@ export default function MyWinnings() {
           </Card.Text>
         </Card.Body>
         <Card.Body>
-          <Button style={{ backgroundColor: "#ec5c28", border: "none" }}>Receive</Button>
+          <Button style={{ backgroundColor: "#DD5A27", border: "none" }}>Receive</Button>
         </Card.Body>
       </Card>
     </div>

@@ -1,5 +1,5 @@
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 
 .App {
@@ -49,7 +49,7 @@
   color: #000;
   font-size: 0.8rem;
   font-weight: bold;
-  color: #ec5c28;
+  color: #dd5a27;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 26px;
@@ -98,12 +98,15 @@
   margin-left: initial !important;
   margin-right: initial !important;
   height: 100%;
-  background-image: linear-gradient(#e85321b9, #e8542199);
+  background-image: url("/public/images/banner.png"); /* linear-gradient(#e85321b9, #e8542199); */
+  background-size: cover; /* This property ensures the background image is contained within the div */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  background-position: center;
   max-width: 350px;
 }
 
 .f-cl-orange {
-  color: #ec5c28 !important;
+  color: #dd5a27 !important;
 }
 
 .f-cl-grey {
@@ -111,7 +114,7 @@
 }
 
 footer {
-  background-color: #e75a29;
+  background-color: #dd5a27;
   color: #fff;
 }
 
@@ -119,18 +122,13 @@ footer p {
   font-size: 15px;
 }
 
-footer > .bi {
+footer .bi {
   font-size: 25px;
-}
-
-footer > .bi-x-diamond-fill {
-  font-size: 8px !important;
-  font-weight: 100;
 }
 
 footer input,
 footer button {
-  background: #e75a29 !important;
+  background: #dd5a27 !important;
   color: #fff !important;
   border: 1px solid #fff !important;
 }
@@ -138,7 +136,11 @@ footer button {
 .img-spin {
   position: absolute !important;
   left: 0px;
-  top: 50%;
-  transform: translate(0px, -50%);
-  width: 50px;
+  top: 0;
+  transform: translate(0px, 100%);
+  width: 65px;
+}
+
+.dotted-line {
+  width: 50%;
 }

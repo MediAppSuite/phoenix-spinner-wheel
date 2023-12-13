@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
 import { WheelData } from "react-custom-roulette/dist/components/Wheel/types";
 
@@ -18,12 +18,14 @@ export default function SpinWheel() {
   const [rouletteData, setRouletteData] = useState(data);
 
   let spinWheelBg: React.CSSProperties = {
-    backgroundImage: `url("/images/golden-bokeh-light-bg.png")`,
+    backgroundImage: `url("/images/banner.png")`,
     position: "relative",
     height: "300px",
+    backgroundSize: "cover",
+    
   };
 
-  const finalizeSpinnerInit = () => {
+  /* const finalizeSpinnerInit = () => {
     setTimeout(() => {
       const handleSpinButtonClick = (e: any) => {
         e.preventDefault();
@@ -57,19 +59,19 @@ export default function SpinWheel() {
         console.log("No spinner div");
       }
     }, 1500);
-  };
+  }; */
 
   //useEffect(finalizeSpinnerInit, []);
 
   return (
     <div style={spinWheelBg} className="spinner-parent">
-      <div className="banner">
+      {/* <div className="banner">
         <img
           src="/images/title.png"
           style={{ width: "80%", marginTop: "10px" }}
           alt={"Background"}
         />
-      </div>
+      </div> */}
       <Wheel
         mustStartSpinning={mustSpin}
         prizeNumber={prizeNumber}
