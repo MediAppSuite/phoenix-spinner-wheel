@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { Modal, Button, Form, Row, Col } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Modal, Button, Form, Row, Col, Image } from "react-bootstrap";
+import {
+  signInWithFacebook,
+  signInWithGoogle,
+} from "../services/FBAuthService";
+import { auth } from "../firebase/firebase";
 
 type PropType = {
   show: boolean;
@@ -10,6 +15,10 @@ export default function LoginModal(props: PropType) {
   const { show, setShow } = props;
 
   const handleClose = () => setShow(false);
+
+  useEffect(() => {
+    if (auth.currentUser) setShow(false);
+  }, [auth.currentUser]);
 
   return (
     <Modal show={show} onHide={handleClose} className="p-4" centered>
@@ -52,12 +61,22 @@ export default function LoginModal(props: PropType) {
           Login
         </Button>
         <div className="separator my-4">Or Login With</div>
-        <div></div>
+        <div className="d-flex justify-content-center w-100">
+          <Image
+            className="auth-providers mx-1"
+            src={"/images/ic-facebook.png"}
+            onClick={() => signInWithFacebook(handleClose)}
+          />
+          <Image
+            className="auth-providers mx-1"
+            src={"/images/ic-google.png"}
+            onClick={() => signInWithGoogle(handleClose)}
+          />
+        </div>
       </Modal.Body>
-      <Modal.Footer className="border-0">
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
+      <Modal.Footer className="border-0 justify-content-center flex-column">
+        <p className="f-cl-grey fs-6 fw-light m-0">Don't have an account?</p>
+        <p className="f-cl-orange fs-6 fw-light m-0">Register Now</p>
       </Modal.Footer>
     </Modal>
   );

@@ -170,3 +170,7 @@ footer button {
 .separator:not(:empty)::after {
   margin-left: 0.25em;
 }
+
+.auth-providers {
+  width: 40px;
+}
