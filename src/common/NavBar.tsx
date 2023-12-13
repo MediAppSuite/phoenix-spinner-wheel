@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import LoginModal from "./LoginModal";
 
 export default function NavBar() {
+  const [show, setShow] = useState(false);
   return (
     <Navbar
       expand="lg"
@@ -21,15 +23,41 @@ export default function NavBar() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link>
-              <Link to={"/my-winnings"} className="text-decoration-none f-cl-orange">My Winnings</Link>
-            </Nav.Link>
-            <Nav.Link>
-              <Link to={"/my-details"} className="text-decoration-none f-cl-orange">My Details</Link>
-            </Nav.Link>
+            {!localStorage.getItem("token") ? (
+              <>
+                <Nav.Link>
+                  <Link
+                    to={"/my-winnings"}
+                    className="f-cl-orange text-decoration-none"
+                  >
+                    My Winnings
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link
+                    to={"/my-details"}
+                    className="f-cl-orange text-decoration-none"
+                  >
+                    My Details
+                  </Link>
+                </Nav.Link>
+              </>
+            ) : (
+              <Nav.Link
+                className="f-cl-orange"
+                onClick={() => setShow(true)}
+              >
+                Login/Sign Up
+              </Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
+      {show ? (
+        <LoginModal show={show} setShow={setShow} />
+      ) : (
+        ""
+      )}
     </Navbar>
   );
 }
