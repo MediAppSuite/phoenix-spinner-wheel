@@ -90,17 +90,9 @@ export default function SpinWheel() {
           },
         }}
         backgroundColors={[
-          "#EAA388",
+          "#dd5a27",
           "#ECECEF",
-          "#EAA388",
-          "#ECECEF",
-          "#EAA388",
-          "#ECECEF",
-          "#EAA388",
-          "#ECECEF",
-          "#EAA388",
-          "#ECECEF",
-          "#EAA388",
+          "#dd5a27",
           "#ECECEF",
         ]}
       />

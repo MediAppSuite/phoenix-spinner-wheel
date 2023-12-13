@@ -13,9 +13,9 @@ export default function Footer() {
       </div>
 
       <br />
-      <img src="/images/dotted-line.png" className="dotted-line" alt="dotted line"/>
+      <img src="/images/dotted-line.png" className="dotted-line mb-4" alt="dotted line"/>
 
-      <div className="container mt-4 mb-3">
+      {/* <div className="container mt-4 mb-3">
         <Row>
           <Col>
             <p>Contact Us</p>
@@ -38,7 +38,7 @@ export default function Footer() {
         <Button>
           <i className="bi bi-arrow-right"></i>
         </Button>
-      </InputGroup>
+      </InputGroup> */}
       <p>Copyright © 2023 Phoenix Industries Limited.</p>
     </footer>
   );

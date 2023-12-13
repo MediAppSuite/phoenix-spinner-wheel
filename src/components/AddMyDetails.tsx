@@ -28,7 +28,9 @@ export default function AddMyDetails() {
 
   return (
     <Card className="m-4 p-3 text-start" style={{ borderRadius: "20px" }}>
-      <Card.Title><h1 className="text-center mb-3">Update Details</h1></Card.Title>
+      <Card.Title>
+        <h1 className="text-center mb-3">Update Details</h1>
+      </Card.Title>
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Col>
@@ -128,9 +130,11 @@ export default function AddMyDetails() {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
-          Save
-        </Button>
+        <div className="d-flex justify-content-center">
+          <Button className="bg-cl-orange border-0" type="submit">
+            Save
+          </Button>
+        </div>
       </Form>
     </Card>
   );

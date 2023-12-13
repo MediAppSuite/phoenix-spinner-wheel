@@ -22,10 +22,10 @@ export default function NavBar() {
             navbarScroll
           >
             <Nav.Link>
-              <Link to={"/my-winnings"}>My Winnings</Link>
+              <Link to={"/my-winnings"} className="text-decoration-none f-cl-orange">My Winnings</Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to={"/my-details"}>My Details</Link>
+              <Link to={"/my-details"} className="text-decoration-none f-cl-orange">My Details</Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
