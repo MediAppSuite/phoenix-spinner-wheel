@@ -18,12 +18,9 @@ export default function AddMyDetails() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // If the user is signed in, update the userEmail state
+      if (user) {      
         setUserEmail(user.email || "");
-      } else {
-        // If the user is not signed in, handle it accordingly
-        // For example, redirect to the login page or show a login form
+      } else {       
       }
     });
 
