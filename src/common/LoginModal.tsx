@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Modal, Button, Form, Row, Col, Image } from "react-bootstrap";
 import {
   signInWithFacebook,
   signInWithGoogle,
 } from "../services/FBAuthService";
 import { auth } from "../firebase/firebase";
+import { sendSignInLinkToEmail } from "firebase/auth";
 
 type PropType = {
   show: boolean;
@@ -17,8 +18,28 @@ export default function LoginModal(props: PropType) {
   const handleClose = () => setShow(false);
 
   useEffect(() => {
-    if (auth.currentUser) setShow(false);
+    if (auth.currentUser) setShow(false); // eslint-disable-next-line
   }, [auth.currentUser]);
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email") as string;
+
+    const actionCodeSettings = {
+      url: `${process.env.REACT_APP_HOST}/verify-email`,
+      handleCodeInApp: true,
+    };
+    
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+      .then(() => {
+        localStorage.setItem("emailForSignIn", email);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
     <Modal show={show} onHide={handleClose} className="p-4" centered>
@@ -28,38 +49,16 @@ export default function LoginModal(props: PropType) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
             <Col sm="10">
-              <Form.Control placeholder="Email" />
+              <Form.Control name="email" placeholder="Email" />
             </Col>
           </Form.Group>
-
-          <Form.Group
-            as={Row}
-            className="mb-3"
-            controlId="formPlaintextPassword"
-          >
-            <Col sm="10">
-              <Form.Control type="password" placeholder="Password" />
-            </Col>
-          </Form.Group>
+          <Button className="bg-cl-orange border-0 w-100 fw-bold" type="submit">
+            Login
+          </Button>
         </Form>
-        <div className="w-100 d-flex justify-content-between">
-          <Form.Check
-            type="checkbox"
-            id="custom-switch"
-            label="Remember me"
-            className="f-cl-grey"
-          />
-          <p className="f-cl-grey">Forgot password?</p>
-        </div>
-        <Button
-          className="bg-cl-orange border-0 w-100 fw-bold"
-          onClick={handleClose}
-        >
-          Login
-        </Button>
         <div className="separator my-4">Or Login With</div>
         <div className="d-flex justify-content-center w-100">
           <Image
@@ -74,10 +73,6 @@ export default function LoginModal(props: PropType) {
           />
         </div>
       </Modal.Body>
-      <Modal.Footer className="border-0 justify-content-center flex-column">
-        <p className="f-cl-grey fs-6 fw-light m-0">Don't have an account?</p>
-        <p className="f-cl-orange fs-6 fw-light m-0">Register Now</p>
-      </Modal.Footer>
     </Modal>
   );
 }

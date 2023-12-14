@@ -6,6 +6,7 @@ import MyWinnings from "./components/MyWinnings";
 import MyDetails from "./components/MyDetails";
 import AddMyDetails from "./components/AddMyDetails";
 import LandingPage from "./components/LandingPage";
+import EmailVerification from "./components/EmailVerification";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/my-winnings" element={<MyWinnings />} />
             <Route path="/my-details" element={<MyDetails />} />
             <Route path="/add-details" element={<AddMyDetails />} />
+            <Route path="/verify-email" element={<EmailVerification />} />
           </Route>
         </Routes>
       </BrowserRouter>
