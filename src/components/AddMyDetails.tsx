@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
+import * as firebase from "firebase/app";
+import "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {firestoreApp} from "../firebase/firebase";
+import { doc, getDoc,updateDoc,setDoc } from "firebase/firestore";
+import { error } from "console";
+import { NOTFOUND } from "dns";
+
+
+
 
 export default function AddMyDetails() {
+
+  const auth = getAuth();
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {      
+        setUserEmail(user.email || "");
+      } else {       
+      }
+    });
+
+    return () => {
+      // Unsubscribe from the auth state observer when the component unmounts
+      unsubscribe();
+    };
+  }, [auth]);
+
+  console.log(userEmail);
+  
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    email: userEmail,
     addressLine1: "",
     addressLine2: "",
     city: "",
@@ -13,7 +43,30 @@ export default function AddMyDetails() {
     province: "",
   });
 
-  const handleChange = (e: any) => {
+  useEffect(() => {
+    // Fetch user data from Firestore when the component mounts
+    const fetchUserData = async () => {
+      try {
+        
+        if (userEmail) {
+          // Use the user's email as the unique identifier
+          const userDoc = await getDoc(doc(firestoreApp, "users", userEmail));
+
+  
+          if (userDoc.exists()) {
+            // If user data exists, set it in the form state
+            setFormData(userDoc.data() as any);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+  
+    fetchUserData();
+  }, [userEmail]); // Run this effect only once when the component mounts
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -21,10 +74,33 @@ export default function AddMyDetails() {
     }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+
+    try {
+     if (userEmail)
+     {
+      const userDoc = await getDoc(doc(firestoreApp, "users", userEmail));
+
+      if (userDoc.exists()) {
+        // If user data exists, update it
+        await updateDoc(doc(firestoreApp, "users", userEmail), formData);
+        console.log("Data updated successfully!");
+      } else {
+        // If user data doesn't exist, create a new document
+        await setDoc(doc(firestoreApp, "users", userEmail), formData);
+        console.log("Data saved successfully!");
+      }
+    }else
+    {
+      throw new Error('Invalid value');
+    }
+    } catch (error) {
+      console.error("Error saving/updating data:", error);
+    }
+  
   };
+
 
   return (
     <Card className="m-4 p-3 text-start" style={{ borderRadius: "20px" }}>
@@ -132,7 +208,7 @@ export default function AddMyDetails() {
 
         <div className="d-flex justify-content-center">
           <Button className="bg-cl-orange border-0" type="submit">
-            Save
+            Save/Update
           </Button>
         </div>
       </Form>

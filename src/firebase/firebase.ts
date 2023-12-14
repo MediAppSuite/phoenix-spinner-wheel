@@ -1,4 +1,6 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore, doc, getDoc, collection, updateDoc, setDoc } from 'firebase/firestore';
+
 import { getAuth } from "firebase/auth";
 
 interface FirebaseConfig {
@@ -21,4 +23,7 @@ const firebaseConfig: FirebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+const firestoreApp = getFirestore(app);  // Initialize Firestore
+
+export { firestoreApp }; 
 export const auth = getAuth(app);
