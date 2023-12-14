@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Col, Form, Row } from "react-bootstrap";
 import * as firebase from "firebase/app";
 import "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import app, {firestoreApp} from "../firebase/firebase";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {firestoreApp} from "../firebase/firebase";
 import { doc, getDoc,updateDoc,setDoc } from "firebase/firestore";
 import { error } from "console";
 import { NOTFOUND } from "dns";
@@ -14,12 +14,31 @@ import { NOTFOUND } from "dns";
 export default function AddMyDetails() {
 
   const auth = getAuth();
-  const userEmail = auth.currentUser?.email;
+  const [userEmail, setUserEmail] = useState<string>("");
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // If the user is signed in, update the userEmail state
+        setUserEmail(user.email || "");
+      } else {
+        // If the user is not signed in, handle it accordingly
+        // For example, redirect to the login page or show a login form
+      }
+    });
+
+    return () => {
+      // Unsubscribe from the auth state observer when the component unmounts
+      unsubscribe();
+    };
+  }, [auth]);
+
+  console.log(userEmail);
   
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
+    email: userEmail,
     addressLine1: "",
     addressLine2: "",
     city: "",
@@ -31,12 +50,11 @@ export default function AddMyDetails() {
     // Fetch user data from Firestore when the component mounts
     const fetchUserData = async () => {
       try {
-        // Get the current user's email
         
-  
         if (userEmail) {
           // Use the user's email as the unique identifier
           const userDoc = await getDoc(doc(firestoreApp, "users", userEmail));
+
   
           if (userDoc.exists()) {
             // If user data exists, set it in the form state
@@ -49,7 +67,7 @@ export default function AddMyDetails() {
     };
   
     fetchUserData();
-  }, []); // Run this effect only once when the component mounts
+  }, [userEmail]); // Run this effect only once when the component mounts
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
