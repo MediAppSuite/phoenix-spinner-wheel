@@ -22,7 +22,8 @@ const firebaseConfig: FirebaseConfig = {
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);const firestoreApp = getFirestore(app);  // Initialize Firestore
-export { firestoreApp }; 
+export const app = initializeApp(firebaseConfig);
+const firestoreApp = getFirestore(app);  // Initialize Firestore
 
+export { firestoreApp }; 
 export const auth = getAuth(app);
