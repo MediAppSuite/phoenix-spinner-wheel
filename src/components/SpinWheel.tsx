@@ -74,7 +74,7 @@ export default function SpinWheel() {
       <Modal show={show} centered>
         <Modal.Header className="border-0">
           <Modal.Title className="w-100 text-center fs-1">
-            {prizeNumber == 0 ? "Opps!" : "Congratulations!"}
+            {prizeNumber == 0 ? "Oops!" : "Congratulations!"}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="border-0">
