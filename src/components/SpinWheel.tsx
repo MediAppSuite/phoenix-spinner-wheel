@@ -86,6 +86,7 @@ export default function SpinWheel() {
         </Modal.Body>
         <Modal.Footer className="border-0">
           <Button
+            className="bg-cl-orange border-0"
             onClick={() => {
               handleModal();
               window.location.replace("https://shop.phoenix.lk/");
