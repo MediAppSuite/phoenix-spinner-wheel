@@ -82,12 +82,10 @@
   margin: 0 auto;
 }
 
-.spinner-parent > .bhdLno {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: 60px;
-}
+/* .spinner-parent > .bhdLno {
+  margin-left: auto;
+  margin-right: auto;
+} */
 
 .banner {
   width: 60vw;
@@ -138,11 +136,8 @@ footer button {
 }
 
 .img-spin {
-  position: absolute !important;
-  left: 0px;
-  top: 0;
-  transform: translate(0px, 100%);
   width: 65px;
+  height: 65px;
 }
 
 .dotted-line {

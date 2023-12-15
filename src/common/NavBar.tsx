@@ -10,7 +10,7 @@ export default function NavBar() {
 
   useEffect(() => {
     console.log(auth.currentUser);
-    
+
     if (auth.currentUser) {
       setNavItems(
         <>
@@ -29,6 +29,15 @@ export default function NavBar() {
             >
               My Details
             </Link>
+          </Nav.Link>
+          <Nav.Link
+            className="f-cl-orange"
+            onClick={() => {
+              auth.signOut();
+              window.location.reload();
+            }}
+          >
+            Sign Out
           </Nav.Link>
         </>
       );

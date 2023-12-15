@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 import { Wheel } from "react-custom-roulette";
 import { WheelData } from "react-custom-roulette/dist/components/Wheel/types";
+import { auth } from "../firebase/firebase";
+import LoginModal from "../common/LoginModal";
 
 export default function SpinWheel() {
   const data: WheelData[] = [
@@ -16,62 +19,37 @@ export default function SpinWheel() {
   const [mustSpin, setMustSpin] = useState(false); // eslint-disable-next-line
   const [prizeNumber, setPrizeNumber] = useState(0); // eslint-disable-next-line
   const [rouletteData, setRouletteData] = useState(data);
+  const [show, setShow] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
-  let spinWheelBg: React.CSSProperties = {
-    backgroundImage: `url("/images/banner.png")`,
-    position: "relative",
-    height: "300px",
-    backgroundSize: "cover",
-    
+  const handleModal = () => {
+    setShow(!show);
   };
 
-  /* const finalizeSpinnerInit = () => {
-    setTimeout(() => {
-      const handleSpinButtonClick = (e: any) => {
-        e.preventDefault();
-        setMustSpin(!mustSpin);
-      };
-      const spinnerDiv = document.querySelector(".bhdLno");
+  function getRandomWin(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let win: number = Math.floor(Math.random() * (max - min + 1)) + min;
+    setPrizeNumber(win);
+  }
 
-      if (spinnerDiv) {
-        const spinButton = document.createElement("button");
-        spinButton.className = "roulette-button";
-        spinButton.textContent = "Spin";
-
-        spinButton.onclick = (ev: MouseEvent) => {
-          let _div = document.getElementsByClassName("sc-dlfnbm")[0];
-          if (_div) _div.classList.add("started-spinning");
-          else console.log("err");
-        };
-
-        spinButton.style.position = "absolute";
-        spinButton.style.top = "50%";
-        spinButton.style.left = "50%";
-        spinButton.style.zIndex = "900";
-        spinButton.style.transform = "translate(-50%, -50%)";
-
-        const span = document.createElement("span");
-        span.textContent = "Click here to spin";
-        spinButton.appendChild(span);
-
-        spinnerDiv.appendChild(spinButton);
-      } else {
-        console.log("No spinner div");
-      }
-    }, 1500);
-  }; */
-
-  //useEffect(finalizeSpinnerInit, []);
+  const startSpinning = () => {
+    if (auth.currentUser) {
+      getRandomWin(0, 3);
+      setMustSpin(!mustSpin);
+    } else {
+      setShowLogin(!showLogin);
+    }
+  };
 
   return (
-    <div style={spinWheelBg} className="spinner-parent">
-      {/* <div className="banner">
-        <img
-          src="/images/title.png"
-          style={{ width: "80%", marginTop: "10px" }}
-          alt={"Background"}
-        />
-      </div> */}
+    <div className="my-4 d-flex justify-content-center align-items-center">
+      <img
+        src="/images/spin.png"
+        alt="Spin"
+        className="img-spin"
+        onClick={startSpinning}
+      />
       <Wheel
         mustStartSpinning={mustSpin}
         prizeNumber={prizeNumber}
@@ -89,27 +67,34 @@ export default function SpinWheel() {
             top: "40px",
           },
         }}
-        backgroundColors={[
-          "#dd5a27",
-          "#ECECEF",
-          "#dd5a27",
-          "#ECECEF",
-        ]}
+        backgroundColors={["#dd5a27", "#ECECEF", "#dd5a27", "#ECECEF"]}
+        onStopSpinning={handleModal}
       />
-      <img
-        src="/images/spin.png"
-        alt="Spin"
-        className="img-spin"
-        onClick={() => setMustSpin(!mustSpin)}
-      />
-      {/*  <Row>
-        <Col>
-          <img src="/images/up-arrow-left.png" alt="" />
-        </Col>
-        <Col>
-          <img src="/images/up-arrow-right.png" alt="" />
-        </Col>
-      </Row>*/}
+      {showLogin ? <LoginModal show={showLogin} setShow={setShowLogin} /> : ""}
+      <Modal show={show} centered>
+        <Modal.Header className="border-0">
+          <Modal.Title className="w-100 text-center fs-1">
+            {prizeNumber == 0 ? "Opps!" : "Congratulations!"}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="border-0">
+          {prizeNumber == 0 ? (
+            <h5>Unfortunately, no prize this time!</h5>
+          ) : (
+            <h5>You have just won {rouletteData[prizeNumber].option}</h5>
+          )}
+        </Modal.Body>
+        <Modal.Footer className="border-0">
+          <Button
+            onClick={() => {
+              handleModal();
+              window.location.replace("https://shop.phoenix.lk/");
+            }}
+          >
+            Go to Phoenix Shop
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
